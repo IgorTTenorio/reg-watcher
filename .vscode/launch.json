@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Venv",
+            "type": "python",
+            "request": "launch",
+            "program": "-m",
+            "args": [
+                "uvicorn",
+                "app.main:app",
+                "--reload",
+                "--port",
+                "8000"
+            ],
+            "python": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Run Docker",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/app",
+                    "remoteRoot": "/app"
+                }
+            ]
+        }
+    ]
+}

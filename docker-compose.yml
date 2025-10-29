@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  regwatcher:
+    build: .
+    container_name: regwatcher_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+      - ./data:/data
+    environment:
+      - DB_PATH=/data/regulations.db
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
