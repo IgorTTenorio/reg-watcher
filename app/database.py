@@ -12,6 +12,7 @@ def init_db():
     cur.execute("""
         CREATE TABLE IF NOT EXISTS regulations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source TEXT,
             title TEXT,
             url TEXT UNIQUE,
             hash TEXT,
@@ -42,3 +43,11 @@ def get_latest():
     rows = cur.fetchall()
     conn.close()
     return [{"title": r[0], "url": r[1], "date": r[2]} for r in rows]
+
+def reset_regulations_table():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("DROP TABLE IF EXISTS regulations;")
+    conn.commit()
+    conn.close()
+    init_db()

@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import asyncio
 from app.crawler import crawl_regulations
-from app.database import init_db, save_regulations, get_latest
+from app.database import init_db, save_regulations, get_latest, reset_regulations_table
 
 
 @asynccontextmanager
@@ -12,7 +12,7 @@ async def lifespan(app: FastAPI):
     yield       
     print("Shutting down...")
 
-app = FastAPI(title="RegWatcher – Regulatory Monitor", lifespan=lifespan)
+app = FastAPI(title="RegWatcher: Regulatory Monitor", lifespan=lifespan)
 
 @app.get("/")
 def home():
@@ -27,3 +27,8 @@ async def update_regulations():
     data = await crawl_regulations()
     save_regulations(data)
     return {"added": len(data)}
+
+@app.post("/regulations/reset")
+def reset_table():
+    reset_regulations_table()
+    return {"message": "Table 'regulations' dropped and recreated successfully."}

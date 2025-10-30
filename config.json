@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "name": "EBA",
+      "url": "https://www.eba.europa.eu/publications-and-media/publications?text=&document_type=All&media_topics=All",
+      "auto_paginate": true,
+      "max_pages": 2
+    },
+    {
+      "name": "BaFin",
+      "url": "https://www.bafin.de/EN/PublikationenDaten/dl_bafinmitteilungen_en.html",
+      "auto_paginate": false,
+      "max_pages": 3
+    },
+    {
+      "name": "BIS",
+      "url": "https://www.bis.org/list/bcbs/index.htm",
+      "auto_paginate": false,
+      "max_pages": 2
+    }
+  ]
+}
