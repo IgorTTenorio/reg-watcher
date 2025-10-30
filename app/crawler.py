@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from hashlib import md5
 from datetime import datetime
 
-BASE_URL = "https://www.eba.europa.eu/regulation-and-policy"
+BASE_URL = "https://www.eba.europa.eu/publications-and-media/publications"
 
 async def fetch_html(session, url):
     async with session.get(url, timeout=20) as resp:

@@ -1,15 +1,18 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import asyncio
-from crawler import crawl_regulations
-from database import init_db, save_regulations, get_latest
+from app.crawler import crawl_regulations
+from app.database import init_db, save_regulations, get_latest
 
-app = FastAPI(title="RegWatcher – Regulatory Monitor")
 
-#@app.on_event("startup")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    print("Initializing database...")
+    init_db()  
+    yield       
+    print("Shutting down...")
+
+app = FastAPI(title="RegWatcher – Regulatory Monitor", lifespan=lifespan)
 
 @app.get("/")
 def home():

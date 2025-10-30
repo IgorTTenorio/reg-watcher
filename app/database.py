@@ -1,4 +1,3 @@
-# app/database.py
 import sqlite3
 import os
 from typing import List, Dict
@@ -32,7 +31,7 @@ def save_regulations(data: List[Dict]):
                 VALUES (?, ?, ?, ?)
             """, (item["title"], item["url"], item["hash"], item["date"]))
         except sqlite3.IntegrityError:
-            pass  # Já existe
+            pass  
     conn.commit()
     conn.close()
 
